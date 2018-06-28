@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import "./index.css";
+
 
 class SearchForm extends Component {
     constructor(props) {
@@ -21,7 +21,7 @@ class SearchForm extends Component {
             axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&api_key=5d6a4c2be0bcb377567ac2c3edd9f472&artist=${this.state.userInput}&format=json`)
             .then((response) => {
                 this.setState({
-                    results: response.data.artist.bio.summary,
+                    results: response.data.artist.bio.content,
                     img_path: response.data.artist.image[5]["#text"]
                 })
                 this.clearInputs();

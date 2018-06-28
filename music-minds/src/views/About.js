@@ -5,13 +5,14 @@ class About extends Component {
         return (
             <div>
                 <h2>About</h2>
-                <p>Zombie ipsum reversus ab viral inferno, nam rick grimes malum:</p>
+                <p>Mauris sem velit, vehicula eget sodales vitae,
+                    rhoncus eget sapien:</p>
                 <ol>
-                    <li>Nam rick grimes malum</li>
-                    <li>Zombie ipsum reversus ab viral inferno, nam rick grimes malum</li>
-                    <li>Zombie ipsum reversus ab viral inferno, nam rick grimes malum</li>
-                    <li>Zombie ipsum reversus ab viral inferno, nam rick grimes malum</li>
-                    <li>Zombie ipsum reversus ab viral inferno, nam rick grimes malum</li>
+                    <li>Nulla pulvinar diam</li>
+                    <li>Facilisis bibendum</li>
+                    <li>Vestibulum vulputate</li>
+                    <li>Eget erat</li>
+                    <li>Id porttitor</li>
                 </ol>
             </div>
         );

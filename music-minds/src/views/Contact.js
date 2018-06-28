@@ -5,7 +5,8 @@ class Contact extends Component {
         return (
             <div>
                 <h2>Got Questions?</h2>
-                <p>Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis. Summus brains sit​​.
+                <p>The easiest thing to do is post on
+                    our <a href="http://forum.kirupa.com">forums</a>.
                 </p>
             </div>
         );
