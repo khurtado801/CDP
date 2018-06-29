@@ -3,7 +3,7 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 import Home from '../views/Home';
 import About from '../views/About';
 import Contact from '../views/Contact';
-import Search from '../views/Search';
+import NewSearch from '../views/NewSearch';
 import './nav.css';
 
 class Nav extends Component {
@@ -13,7 +13,7 @@ class Nav extends Component {
                     <div className="header-wrapper">
                         <ul className="header">
                             <li ><NavLink to="/">Home</NavLink></li>
-                            <li><NavLink to="/search">Search</NavLink></li>
+                            <li><NavLink to="/newsearch">Search</NavLink></li>
                             <li><NavLink to="/about">About</NavLink></li>
                             <li><NavLink to="/contact">Contact</NavLink></li>
                         </ul>
@@ -21,7 +21,7 @@ class Nav extends Component {
                     <div className="content">
                         <Switch>
                             <Route exact path="/" component={Home} />
-                            <Route path="/Search" component={Search} />
+                            <Route path="/NewSearch" component={NewSearch} />
                             <Route path="/About" component={About} />
                             <Route path="/Contact" component={Contact} />
                         </Switch>
