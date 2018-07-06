@@ -16,7 +16,6 @@ class NewSearch extends Component {
     getRequest = (e) => {
         let { userInput } = this.state;
         e.preventDefault();
-        
         // Search results from query by artist name, bio and artist image returned
         axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&api_key=5d6a4c2be0bcb377567ac2c3edd9f472&artist=${userInput}&format=json`)
             .then((response) => {
@@ -85,6 +84,22 @@ class NewSearch extends Component {
                 this.clearInputs();
             })
             .catch((err) => console.error('Err4: ', err));
+        
+        // Search results by track name, returns artist name and image
+        axios.get(`http://ws.audioscrobbler.com/2.0/?method=track.search&track=${userInput}&api_key=5d6a4c2be0bcb377567ac2c3edd9f472&format=json`)
+            .then((res) => {
+                this.data = res.data.results.trackmatches.track;
+                this.data.forEach((item) => {
+                    console.log('Found Item5: ', item);
+                    console.log('Found Item5: ', item.track);
+                });
+                this.data.map((item, index) => {
+                    console.log('Search5 Tracks: ', item.name);
+                    console.log('Search5 Track URL: ', item.url);
+                });
+                this.clearInputs();
+            })
+            .catch((err) => console.error('Err5: ', err));
     };
 
     clearInputs = () => {
