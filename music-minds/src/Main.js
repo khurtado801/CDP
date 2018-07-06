@@ -5,11 +5,13 @@ import Footer from './components/Footer';
 
 class Main extends Component {
     render() {
-        return <div>
-            <Header />
-            <Nav />
-            <Footer />
-        </div>;
+        return (
+            <div>
+                <Header />
+                <Nav />
+                <Footer />
+            </div>
+        );
     }
 }
 

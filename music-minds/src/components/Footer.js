@@ -9,11 +9,14 @@ class Footer extends Component {
                     <div className="contact-items-wrapper">
                         <h3>
                             <a href="https://www.linkedin.com/in/khurtado801/">
-                                <i className="glyphicon glyphicon-pencil"></i>LinkedIn</a>
+                                <i className="glyphicon glyphicon-pencil" />LinkedIn
+                            </a>
                             <a href="https://github.com/khurtado801/Web-Dev-Projects">
-                                <i className="glyphicon glyphicon-cloud"></i>GitHub</a>
+                                <i className="glyphicon glyphicon-cloud" />GitHub
+                            </a>
                             <a href="https://drive.google.com/open?id=1rAKLHbC4GLqc17S4YTQwpQY2A9Edmj1o">
-                                <i className="glyphicon glyphicon-list-alt"></i>My Resume</a>
+                                <i className="glyphicon glyphicon-list-alt" />My Resume
+                            </a>
                         </h3>
                     </div>
                 </div>

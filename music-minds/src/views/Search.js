@@ -9,12 +9,12 @@ class SearchForm extends Component {
             results: '',
             userInput: '',
             img_path: '',
-            alt: 'Artist Image'
-        }
+            // alt: 'Artist Image'
+        };
     }
 
     getRequest = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         // axios.get(`http://www.theaudiodb.com/api/v1/json/195003/search.php?s=crazy%p`)
         // axios.get(`http://www.theaudiodb.com/api/v1/json/195003/search.php?s=${this.state.artistQuery}`)
         // axios.get(`http://www.theaudiodb.com/api/v1/json/195003/search.php?s=${this.state.userInput}`)
@@ -22,8 +22,8 @@ class SearchForm extends Component {
             .then((response) => {
                 this.setState({
                     results: response.data.artist.bio.content,
-                    img_path: response.data.artist.image[5]["#text"]
-                })
+                    img_path: response.data.artist.image[5]['#text']
+                });
                 this.clearInputs();
             })
             .catch((err) => console.error(err));
@@ -32,14 +32,14 @@ class SearchForm extends Component {
     clearInputs = () => {
         this.setState({
             userInput: ''
-        })
+        });
     }
 
     handleChange = (e) => {
         let { value } = e.target;
         this.setState((prevState) => {
-            return { userInput: value }
-        })
+            return { userInput: value };
+        });
     }
 
     render() {
@@ -50,7 +50,7 @@ class SearchForm extends Component {
                 <form onSubmit={this.getRequest}>
                     <fieldset>
                         <label>
-                            <input onChange={this.handleChange} value={userInput} name="artist" type="text"/>
+                            <input onChange={this.handleChange} value={userInput} name="artist" type="text" />
                             <button type="submit">Search</button>
                         </label>
                     </fieldset>

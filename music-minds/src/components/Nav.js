@@ -12,7 +12,7 @@ class Nav extends Component {
             <div className="wrapper">
                     <div className="header-wrapper">
                         <ul className="header">
-                            <li ><NavLink to="/">Home</NavLink></li>
+                            <li><NavLink to="/">Home</NavLink></li>
                             <li><NavLink to="/newsearch">Search</NavLink></li>
                             <li><NavLink to="/about">About</NavLink></li>
                             <li><NavLink to="/contact">Contact</NavLink></li>
