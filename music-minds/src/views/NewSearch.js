@@ -10,7 +10,6 @@ class NewSearch extends Component {
             userInput: '',
             img_path: '',
             albumResults: '',
-            alt: 'Artist Image',
         };
     }
 
@@ -34,9 +33,12 @@ class NewSearch extends Component {
             .then((res) => {
                 this.data = res.data.album;
                 this.data.forEach((item) => {
-                    console.log('Found: Item1', item);
-                    console.log('Found Album1: ', item.strAlbum);
+                    // console.log('Found: Item1', item);
+                    // console.log('Found Album1: ', item.strAlbum);
                     console.log('Found Thumb1: ', item.strAlbumThumb);
+                });
+                this.data.map((item, index) => {
+                    console.log('Search1 Albums: ', item.strAlbum);
                 });
                 this.clearInputs();
             })
@@ -48,12 +50,12 @@ class NewSearch extends Component {
                 this.data = res.data.topalbums.album;
                 // this.data.albumResults = this.data.albumResults || `{album: []}`;
                 this.data.forEach((item) => {
-                    console.log('Found Item2: ', item);
+                    // console.log('Found Item2: ', item);
                     console.log('Found Image2: ', item.image[3]['#text']);
-                    console.log('Found Album2: ', item.name);
-                    this.setState({
-                        albumResults: item.name
-                    });
+                    // console.log('Found Album2: ', item.name);
+                });
+                this.data.map((item, index) => {
+                    console.log('Search2 Albums: ', item.name);
                 });
                 this.clearInputs();
             })
@@ -100,7 +102,6 @@ class NewSearch extends Component {
 
     render() {
         let { userInput, bioResults, img_path, albumResults } = this.state;
-        console.log('This.state: ', this.state);
         return (
             <div className="component-wrapper">
                 <h2>Start Your Search For Some Tasty Tunes</h2>
