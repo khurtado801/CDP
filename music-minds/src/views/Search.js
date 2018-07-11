@@ -57,7 +57,7 @@ class SearchForm extends Component {
                 </form>
                 <div>
                     <p>{results}</p>
-                    <img src={img_path} />
+                    <img src={img_path} alt="" />
                 </div>
             </div>
         );

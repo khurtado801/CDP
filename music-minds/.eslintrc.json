@@ -7,6 +7,9 @@
             2,
             "single"
         ],
+        "array-callback-return": 0,
+        "react/self-closing-comp": 0,
+        "react/no-array-index-key": 0,
         "jsx-a11y/label-has-for": 0,
         "object-curly-newline": 0,
          "react/jsx-one-expression-per-line": 0,

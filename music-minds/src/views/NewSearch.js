@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import SearchList from '../components/SearchList';
 import './index.css';
 
 class NewSearch extends Component {
@@ -8,8 +9,9 @@ class NewSearch extends Component {
         this.state = {
             bioResults: '',
             userInput: '',
-            img_path: '',
-            albumResults: '',
+            lastFmArtistImg: '',
+            audioDbAlbums: [],
+            lastFmAlbums: []
         };
     }
 
@@ -21,40 +23,48 @@ class NewSearch extends Component {
             .then((response) => {
                 this.setState({
                     bioResults: response.data.artist.bio.content,
-                    img_path: response.data.artist.image[5]['#text']
+                    lastFmArtistImg: response.data.artist.image[5]['#text']
                 });
                 this.clearInputs();
             })
             .catch((err) => console.error(err));
 
-        // Search results from query by artist name, album name and album image returned
+        // AudioDB search results from query by artist name, album name and album image returned
         axios.get(`http://www.theaudiodb.com/api/v1/json/195003/searchalbum.php?s=${userInput}`)
             .then((res) => {
+                let audioDbAlbumsRes = res.data.album;
                 this.data = res.data.album;
                 this.data.forEach((item) => {
                     // console.log('Found: Item1', item);
-                    // console.log('Found Album1: ', item.strAlbum);
-                    console.log('Found Thumb1: ', item.strAlbumThumb);
+                    console.log('Found Album1: ', item.strAlbum);
+                    // console.log('Found Thumb1: ', item.strAlbumThumb);
                 });
-                this.data.map((item, index) => {
-                    console.log('Search1 Albums: ', item.strAlbum);
+                // this.data.map((Album1, index) => {
+                //     console.log('Search1 Albums: ', Album1.strAlbum);
+                // });
+                this.setState({
+                    audioDbAlbums: audioDbAlbumsRes,
                 });
                 this.clearInputs();
             })
             .catch((err) => console.error('Err1: ', err));
 
-        // Search results from query by artist name, album name and album image returned
+        // LastFM search results from query by artist name, album name returned
         axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=${userInput}&api_key=5d6a4c2be0bcb377567ac2c3edd9f472&format=json`)
             .then((res) => {
-                this.data = res.data.topalbums.album;
+                let lastFmAlbumsRes = res.data.topalbums.album;
+                // this.data = res.data.topalbums.album;
                 // this.data.albumResults = this.data.albumResults || `{album: []}`;
-                this.data.forEach((item) => {
+                // this.data.forEach((item) => {
                     // console.log('Found Item2: ', item);
-                    console.log('Found Image2: ', item.image[3]['#text']);
+                    // console.log('Found Image2: ', item.image[3]['#text']);
                     // console.log('Found Album2: ', item.name);
-                });
-                this.data.map((item, index) => {
-                    console.log('Search2 Albums: ', item.name);
+                // });
+                // this.data.map((Album2, index) => {
+                //     console.log('Search2 Albums: ', Album2.name);
+                // });
+                this.setState({
+                    lastFmAlbums: lastFmAlbumsRes
                 });
                 this.clearInputs();
             })
@@ -85,17 +95,21 @@ class NewSearch extends Component {
             })
             .catch((err) => console.error('Err4: ', err));
         
-        // Search results by track name, returns artist name and image
-        axios.get(`http://ws.audioscrobbler.com/2.0/?method=track.search&track=${userInput}&api_key=5d6a4c2be0bcb377567ac2c3edd9f472&format=json`)
+        // Search results by artist/track name, returns artist/track name
+        axios.get(`http://ws.audioscrobbler.com/2.0/?method=track.search&track=${userInput}&limit=10&api_key=5d6a4c2be0bcb377567ac2c3edd9f472&format=json`)
             .then((res) => {
-                this.data = res.data.results.trackmatches.track;
+                let lastFmTracksRes = res.data.results.trackmatches.track;
+                // this.data = res.data.results.trackmatches.track;
                 this.data.forEach((item) => {
                     console.log('Found Item5: ', item);
                     console.log('Found Item5: ', item.track);
                 });
-                this.data.map((item, index) => {
-                    console.log('Search5 Tracks: ', item.name);
-                    console.log('Search5 Track URL: ', item.url);
+                this.data.map((track, index) => {
+                    console.log('Search5 Tracks: ', track.name);
+                    console.log('Search5 Track URL: ', track.url);
+                });
+                this.setState({
+                    lastFmTracks: lastFmTracksRes
                 });
                 this.clearInputs();
             })
@@ -116,7 +130,7 @@ class NewSearch extends Component {
     };
 
     render() {
-        let { userInput, bioResults, img_path, albumResults } = this.state;
+        let { userInput, bioResults, lastFmArtistImg, audioDbAlbums, lastFmAlbums } = this.state;
         return (
             <div className="component-wrapper">
                 <h2>Start Your Search For Some Tasty Tunes</h2>
@@ -129,9 +143,18 @@ class NewSearch extends Component {
                     </fieldset>
                 </form>
                 <div>
+                    <img src={lastFmArtistImg} alt="" />
                     <p>{bioResults}</p>
-                    <img src={img_path} />
-                    <p>{albumResults}</p>
+                    <div>
+                        {audioDbAlbums.map((audioDbAlbum, i) => {
+                            return <SearchList key={i} {...audioDbAlbum}></SearchList>;
+                        })}
+                    </div>
+                    <div>
+                        {lastFmAlbums.map((lastFmAlbum, i) => {
+                            return <SearchList key={i} {...lastFmAlbum}></SearchList>;
+                        })}
+                    </div>
                 </div>
             </div>
         );
