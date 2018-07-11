@@ -5,14 +5,10 @@ class About extends Component {
         return (
             <div>
                 <h2>About</h2>
-                <p>Mauris sem velit, vehicula eget sodales vitae,
-                    rhoncus eget sapien:</p>
+                <p>Zonbi tattered for solum oculi eorum defunctis go lum cerebro:</p>
                 <ol>
-                    <li>Nulla pulvinar diam</li>
-                    <li>Facilisis bibendum</li>
-                    <li>Vestibulum vulputate</li>
-                    <li>Eget erat</li>
-                    <li>Id porttitor</li>
+                    <li>Nescio brains an Undead zombies. Sicut malus putrid voodoo horror. Nigh tofth eliv ingdead.</li>
+                    <li>Pestilentia, shaun ofthe dead scythe animated corpses ipsa screams.</li>
                 </ol>
             </div>
         );
