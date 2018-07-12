@@ -11,7 +11,10 @@ class Search extends Component {
             userInput: '',
             lastFmArtistImg: '',
             audioDbAlbums: [],
-            lastFmAlbums: []
+            lastFmAlbums: [],
+            lastFmTracks: [],
+            lastFmArtist: [],
+            type: ''
         };
     }
 
@@ -23,7 +26,7 @@ class Search extends Component {
             .then((response) => {
                 this.setState({
                     bioResults: response.data.artist.bio.content,
-                    lastFmArtistImg: response.data.artist.image[5]['#text']
+                    lastFmArtistImg: response.data.artist.image[4]['#text']
                 });
                 this.clearInputs();
             })
@@ -36,6 +39,7 @@ class Search extends Component {
                 this.data = res.data.album;
                 this.data.forEach((item) => {
                     // console.log('Found: Item1', item);
+                    item.type = 'album';
                     console.log('Found Album1: ', item.strAlbum);
                     // console.log('Found Thumb1: ', item.strAlbumThumb);
                 });
@@ -53,13 +57,13 @@ class Search extends Component {
         axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=${userInput}&api_key=5d6a4c2be0bcb377567ac2c3edd9f472&format=json`)
             .then((res) => {
                 let lastFmAlbumsRes = res.data.topalbums.album;
-                // this.data = res.data.topalbums.album;
-                // this.data.albumResults = this.data.albumResults || `{album: []}`;
-                // this.data.forEach((item) => {
-                    // console.log('Found Item2: ', item);
-                    // console.log('Found Image2: ', item.image[3]['#text']);
-                    // console.log('Found Album2: ', item.name);
-                // });
+                this.data = res.data.topalbums.album;
+                this.data.forEach((item) => {
+                    item.type = 'album';
+                    console.log('Found Item2: ', item);
+                    console.log('Found Image2: ', item.image[3]['#text']);
+                    console.log('Found Album2: ', item.name);
+                });
                 // this.data.map((Album2, index) => {
                 //     console.log('Search2 Albums: ', Album2.name);
                 // });
@@ -75,6 +79,7 @@ class Search extends Component {
             .then((res) => {
                 this.data = res.data.albummatches.album;
                 this.data.forEach((item) => {
+                    item.type = 'album';
                     console.log('Found Item3: ', item);
                     console.log('Found Image3: ', item.image[3]['#text']);
                     console.log('Found Album3: ', item.name);
@@ -99,10 +104,12 @@ class Search extends Component {
         axios.get(`http://ws.audioscrobbler.com/2.0/?method=track.search&track=${userInput}&limit=10&api_key=5d6a4c2be0bcb377567ac2c3edd9f472&format=json`)
             .then((res) => {
                 let lastFmTracksRes = res.data.results.trackmatches.track;
-                // this.data = res.data.results.trackmatches.track;
+                this.data = res.data.results.trackmatches.track;
                 this.data.forEach((item) => {
+                    item.type = 'track';
                     console.log('Found Item5: ', item);
-                    console.log('Found Item5: ', item.track);
+                    console.log('Found Item5 Track: ', item.track);
+                    console.log('Found Item5 Artist: ', item.artist);
                 });
                 this.data.map((track, index) => {
                     console.log('Search5 Tracks: ', track.name);
@@ -130,7 +137,7 @@ class Search extends Component {
     };
 
     render() {
-        let { userInput, bioResults, lastFmArtistImg, audioDbAlbums, lastFmAlbums } = this.state;
+        let { userInput, bioResults, lastFmArtistImg, audioDbAlbums, lastFmAlbums, lastFmTracks } = this.state;
         return (
             <div className="component-wrapper">
                 <h2>Start Your Search For Some Tasty Tunes</h2>
