@@ -87,18 +87,6 @@ class Search extends Component {
                 this.clearInputs();
             })
             .catch((err) => console.error('Err3: ', err));
-
-        // Search results by artist name, returns release group ID to be used to find album
-        axios.get(`http://musicbrainz.org/ws/2/release/?query=release:${userInput}&fmt=json`)
-            .then((res) => {
-                this.data = res.data.releases;
-                this.data.forEach((item) => {
-                    console.log('Found Item4: ', item);
-                    console.log('Found Item4: ', item.id);
-                });
-                this.clearInputs();
-            })
-            .catch((err) => console.error('Err4: ', err));
         
         // Search results by artist/track name, returns artist/track name
         axios.get(`http://ws.audioscrobbler.com/2.0/?method=track.search&track=${userInput}&limit=10&api_key=5d6a4c2be0bcb377567ac2c3edd9f472&format=json`)
