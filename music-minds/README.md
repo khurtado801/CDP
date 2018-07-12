@@ -8,6 +8,7 @@ Return Artist details from artist name. Return all album details from artist nam
 
 Technologies Used:
 React
+Axios
 
 Bootstrapped:
 Using create-react-app
